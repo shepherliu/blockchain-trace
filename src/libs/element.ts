@@ -60,12 +60,23 @@ export const alertMessage = async(error: any) => {
 
     if( error.error != undefined && 
         error.error != null && 
+        error.error.data != undefined &&
+        error.error.data != null &&
+        error.error.data.message != undefined &&
+        error.error.data.message != null){
+
+        elMessage('error', truncateString(error.error.data.message, 300)); 
+        return;
+    }      
+
+    if( error.error != undefined && 
+        error.error != null && 
         error.error.message != undefined &&
         error.error.message != null){
 
         elMessage('error', truncateString(error.error.message, 300)); 
         return;
-    }      
+    }           
 
     if( error.error != undefined &&
         error.error != null) {

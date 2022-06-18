@@ -33,6 +33,15 @@ a {
   color: #42b983;
 }
 
+table {
+  margin-top: 20px;
+  text-align: center;
+}
+
+td {
+  margin-top: 4px;
+}
+
 .el-menu {
   border-bottom: none;
 }

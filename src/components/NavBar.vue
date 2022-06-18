@@ -21,11 +21,11 @@
         active-text-color="#ffd04b"
         @select="handleSelect"
       >
-        <el-menu-item index="1">Files</el-menu-item>
-        <el-menu-item index="2">Folders</el-menu-item>
-        <el-menu-item index="3">Websites</el-menu-item>
-        <el-menu-item index="4">Nfts</el-menu-item>
-        <el-menu-item index="5">Votes</el-menu-item>
+        <el-menu-item index="1">Tokens</el-menu-item>
+        <el-menu-item index="2">Holders</el-menu-item>
+        <el-menu-item index="3">Blocks</el-menu-item>
+        <el-menu-item index="4">Transactions</el-menu-item>
+        <el-menu-item index="5">LogEvents</el-menu-item>
       </el-menu>
     </el-col>
 
@@ -110,7 +110,6 @@
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item @click="onConnect" :innerText="connectStatus"></el-dropdown-item>
-                <el-dropdown-item @click="onNetworkConfig">Network Config</el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>
@@ -118,89 +117,7 @@
     </el-col>
 
   </el-row>
-  
-  <!-- side drawer component-->
-  <el-drawer v-model="showSwitchNetwork" direction="rtl" destroy-on-close @open="onDrawerOpen">
-      <template #header>
-        <h4>Select to config the network</h4>   
-      </template>
-      <template #default>
-        <table style="margin-left: 50px;">
-          <tr>
-            <td style="width:100px">Network</td>
-            <td style="width:200px">
-              <el-select 
-                v-model="networkSelected"
-                style="width:200px" 
-                placeholder="Select Network" 
-                :teleported="false"
-                @change="onNetworkSelected"
-                filterable
-              >
-                <el-option
-                  v-for="item in networkOptions"
-                  :key="item.chainName"
-                  :label="item.chainName"
-                  :value="item.chainId"
-                />
-              </el-select>
-            </td>
-          </tr>
-          <tr>
-            <td style="width:100px">Storage</td>
-            <td style="width:200px">
-              <el-select 
-                v-model="storageSelected"
-                style="width:200px"
-                placeholder="Select Storage"
-                :teleported="false"
-                filterable
-              >
-                <el-option key="swarm" label="Swarm Network" value="swarm"/>
-                <el-option key="bundlr" label="Bundlr Network" value="bundlr"/>
-                <el-option key="filcoin" label="Filcoin Network" value="filcoin"/>
-              </el-select> 
-            </td>
-          </tr>
-          <tr v-if="storageSelected==='bundlr'">
-            <td style="width:100px">Token</td>
-            <td style="width:200px">
-              <el-select
-                v-model="tokenSelected"
-                style="width:200px"
-                placeholder="Select Network"
-                :teleported="false"
-                filterable
-              >
-                <el-option
-                  v-for="item in tokenOptions"
-                  :key="item"
-                  :label="item"
-                  :value="item"
-                />
-              </el-select>               
-            </td>
-          </tr>
-          <tr v-if="storageSelected==='filcoin'">
-            <td style="width:100px">ApiToken</td>
-            <td style="width:200px;">
-              <el-input
-                v-model="apiTokenSelected"
-                style="width:200px;margin-left: 10px;"
-                clearable
-              >
-              </el-input>
-            </td>
-          </tr>
-        </table>         
-      </template>
-      <template #footer>
-        <div style="flex: auto">
-          <el-button @click="cancelSwitchNetwork">cancel</el-button>
-          <el-button type="primary" @click="confirmSwitchNetwork">confirm</el-button>
-        </div>
-      </template>
-    </el-drawer>  
+
 </template>
 
 <script lang="ts">  
@@ -234,15 +151,8 @@ const networkName = ref("");
 const searchContent = ref("");
 const activeIndex = connect.connectState.activeIndex;
 const connectStatus = ref("Connect Wallet");
-const showSwitchNetwork = ref(false);
 const transactions = connect.connectState.transactions;
 const transactionCount = connect.connectState.transactionCount;
-const networkSelected = ref(connect.connectState.chainId);
-const storageSelected = ref(connect.connectState.storage);
-const tokenSelected = ref(connect.connectState.currency);
-const apiTokenSelected = ref(connect.connectState.web3Storage==='' ? constant.web3StorageAppKey : connect.connectState.web3Storage);
-const networkOptions = constant.chainList;
-const tokenOptions = ref((constant.tokenList as any)[connect.connectState.chainId]);
 
 //transaction explore url
 const transactionExplorerUrl = (transaction:string) => {
@@ -255,14 +165,6 @@ const transactionExplorerUrl = (transaction:string) => {
 
   return transaction;
 }
-
-// const resolveAddress = async (userAddr:string, currency = "ETH") => {
-//   try{
-//     return await resolution.addr(userAddr, currency);
-//   }catch(e){
-//     return userAddr;
-//   }
-// }
 
 //connect to metamask
 const connectNetwork = async () => {
@@ -322,8 +224,6 @@ const accountsChanged = async (accounts: string[]) => {
 
 connect.connectState.accountsChanged = accountsChanged;
 
-// connect.accountsChanged(accountsChanged);
-
 //on wallet network changed
 const chainChanged = async () => {
   //clear transactions when network changed
@@ -341,82 +241,6 @@ const chainChanged = async () => {
 }
 
 connect.connectState.chainChanged = chainChanged;
-
-// connect.chainChanged(chainChanged); 
-
-//on drawer open to switch network
-const onDrawerOpen = async () => {
-  networkSelected.value = connect.connectState.chainId;
-  storageSelected.value = connect.connectState.storage;
-  tokenSelected.value = connect.connectState.currency;
-  tokenOptions.value = (constant.tokenList as any)[connect.connectState.chainId];
-
-  //make sure token is avaiable in selected network
-  for(const i in tokenOptions.value){
-    if(tokenOptions.value[i] === tokenSelected.value){
-      return;
-    }
-  }
-  tokenSelected.value = tokenOptions.value[0];      
-}
-
-//on select the network
-const onNetworkSelected = async () => {
-  tokenOptions.value = (constant.tokenList as any)[networkSelected.value];
-  for(const i in tokenOptions.value){
-    if(tokenOptions.value[i] === tokenSelected.value){
-      return;
-    }
-  }
-
-  tokenSelected.value = tokenOptions.value[0];
-}
-
-//on cancel switch network clicked
-const cancelSwitchNetwork = async () => {
-  showSwitchNetwork.value = false;
-}
-
-//on confirm swithc network clicked
-const confirmSwitchNetwork = async () => {
-  try{
-
-    showSwitchNetwork.value = false;
-
-    if(Number(networkSelected.value) <= 0){
-      element.elMessage('warning', 'Invalid network selected!');
-      return;
-    }
-
-    const res = await network.switchNetwork(Number(networkSelected.value));
-    if(!res){
-      element.elMessage('warning', 'Switch network chain failed!');
-      return;      
-    }
-
-    if(!(await connect.connected())){
-      await connectNetwork();
-    }
-
-    connect.connectState.storage = storageSelected.value;
-
-    if (storageSelected.value === 'bundlr'){
-      connect.connectState.currency = tokenSelected.value;
-    }
-
-    if (storageSelected.value === 'filcoin'){
-      if (apiTokenSelected.value === ''){
-        apiTokenSelected.value = constant.web3StorageAppKey;
-      }
-
-      connect.connectState.web3Storage = apiTokenSelected.value;
-    }
-
-    element.elMessage('success', 'Config network success!');
-  }catch(e){
-    element.alertMessage(e);
-  }
-}
 
 //on click to clear transtractions
 const onClearTransactions = async () => {
@@ -452,11 +276,6 @@ const onConnect = async () => {
   }
 };
 
-//on switch network clicked
-const onNetworkConfig = async () => {
-  showSwitchNetwork.value = true;
-}
-
 //on menus selected
 const handleSelect = (key: string, keyPath: string[]) => {
   activeIndex.value = key;
@@ -467,7 +286,6 @@ const handleSelect = (key: string, keyPath: string[]) => {
 //login to wallet and switch to the target chain.
 const login = async () => {
   await connectNetwork();
-  await confirmSwitchNetwork();
   connect.connectState.searchCallback();
 };
 
@@ -476,8 +294,8 @@ try{
   activeIndex.value = String(tools.getUrlParamter('activeIndex'));
   if(activeIndex.value != '1' && 
     activeIndex.value != '2' && 
-    activeIndex.value != '3' &&
-    activeIndex.value != '4' &&
+    activeIndex.value != '3' && 
+    activeIndex.value != '4' && 
     activeIndex.value != '5'){
     activeIndex.value = '1';
   }

@@ -1,8 +1,12 @@
 import * as constant from '../constant'
 
-export const getTokenBalancesForAddress = async (chainId:number, address:string) => {
+export const getTokenBalancesForAddress = async (chainId:number, address:string, nft:boolean = false) => {
 
-	const url = `${constant.covalentApiHost}/v1/${chainId}/address/${address}/balances_v2/?key=${constant.covalentApiKey}`;
+	let url = `${constant.covalentApiHost}/v1/${chainId}/address/${address}/balances_v2/?key=${constant.covalentApiKey}`;
+
+	if(nft){
+		url = `${constant.covalentApiHost}/v1/${chainId}/address/${address}/balances_v2/?nft=true&no-nft-fetch=true&key=${constant.covalentApiKey}`;
+	}
 
 	let res = await fetch(url, {
 		headers: {
@@ -20,7 +24,7 @@ export const getTokenBalancesForAddress = async (chainId:number, address:string)
 	}
 
 	try{
-		res = await (res.json() as any)['data']['items'];
+		res = ((await res.json()) as any)['data']['items'];
 	}catch(e){
 		throw new Error('get token balance for address failed.');
 	}
@@ -48,7 +52,7 @@ export const getErc20TokenTransfersForAddress = async (chainId:number, address:s
 	}
 
 	try{
-		res = await (res.json() as any)['data']['items'];
+		res = ((await res.json()) as any)['data']['items'];
 	}catch(e){
 		throw new Error('get erc20 token transfer for address failed.');
 	}
@@ -80,7 +84,7 @@ export const getTokenHoldersForBlockHeight = async (chainId:number, contract:str
 	}
 
 	try{
-		res = await (res.json() as any)['data']['items'];
+		res = ((await res.json()) as any)['data']['items'];
 	}catch(e){
 		throw new Error('get token holders for block height failed.');
 	}
@@ -108,7 +112,7 @@ export const getChangesInTokenHoldersBetweenBlocks = async (chainId:number, cont
 	}
 
 	try{
-		res = await (res.json() as any)['data']['items'];
+		res = ((await res.json()) as any)['data']['items'];
 	}catch(e){
 		throw new Error('get token holders changes between blocks height failed.');
 	}
@@ -136,7 +140,7 @@ export const getNFTTokenIdForContract = async (chainId:number, contract:string) 
 	}
 
 	try{
-		res = await (res.json() as any)['data']['items'];
+		res = ((await res.json()) as any)['data']['items'];
 	}catch(e){
 		throw new Error('get nft token ids for contract failed.');
 	}
@@ -165,7 +169,7 @@ export const getNFTTransactionsForContract = async (chainId:number, contract:str
 	}
 
 	try{
-		res = await (res.json() as any)['data']['items'];
+		res = ((await res.json()) as any)['data']['items'];
 	}catch(e){
 		throw new Error('get nft transactions for contract failed.');
 	}
@@ -194,7 +198,7 @@ export const getNFTExternalMetadataForContract = async (chainId:number, contract
 	}
 
 	try{
-		res = await (res.json() as any)['data']['items'];
+		res = ((await res.json()) as any)['data']['items'];
 	}catch(e){
 		throw new Error('get nft external metadata for contract failed.');
 	}
@@ -222,7 +226,7 @@ export const getTransactionsForAddress = async (chainId:number, address:string) 
 	}
 
 	try{
-		res = await (res.json() as any)['data']['items'];
+		res = ((await res.json()) as any)['data']['items'];
 	}catch(e){
 		throw new Error('get transactions for address failed.');
 	}
@@ -250,7 +254,7 @@ export const getTransaction = async (chainId:number, transaction:string) => {
 	}
 
 	try{
-		res = await (res.json() as any)['data']['items'];
+		res = ((await res.json()) as any)['data']['items'];
 	}catch(e){
 		throw new Error('get transaction failed.');
 	}
@@ -279,7 +283,7 @@ export const getBlock = async (chainId:number, block:number|string) => {
 	}
 
 	try{
-		res = await (res.json() as any)['data']['items'];
+		res = ((await res.json()) as any)['data']['items'];
 	}catch(e){
 		throw new Error('get block failed.');
 	}
@@ -307,7 +311,7 @@ export const getBlockHeights = async (chainId:number, starttime:string, endtime:
 	}
 
 	try{
-		res = await (res.json() as any)['data']['items'];
+		res = ((await res.json()) as any)['data']['items'];
 	}catch(e){
 		throw new Error('get block heights failed.');
 	}
@@ -335,7 +339,7 @@ export const getLogEventsByContractAddress = async (chainId:number, contract:str
 	}
 
 	try{
-		res = await (res.json() as any)['data']['items'];
+		res = ((await res.json()) as any)['data']['items'];
 	}catch(e){
 		throw new Error('get log events by contract address failed.');
 	}
@@ -363,7 +367,7 @@ export const getAllChains = async () => {
 	}
 
 	try{
-		res = await (res.json() as any)['data']['items'];
+		res = ((await res.json()) as any)['data']['items'];
 	}catch(e){
 		throw new Error('get all chains failed.');
 	}
@@ -392,7 +396,7 @@ export const getAllChainStatuses = async () => {
 	}
 
 	try{
-		res = await (res.json() as any)['data']['items'];
+		res = ((await res.json()) as any)['data']['items'];
 	}catch(e){
 		throw new Error('get chains status failed.');
 	}
