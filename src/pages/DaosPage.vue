@@ -14,7 +14,7 @@
           trigger="hover"
         >
           <template #reference>
-            <el-link type="danger" @click="javascript:void(0);" style="margin-left: 10px;">Vote Rights: {{!baseInfo.currentUserBanned && baseInfo.currentUserBalance >= 1}}</el-link>
+            <el-link type="danger" href="javascript:void(0);" style="margin-left: 10px;">Vote Rights: {{!baseInfo.currentUserBanned && baseInfo.currentUserBalance >= 1}}</el-link>
           </template>
           <h4>Users who own the NFTs of this project and not in the blacklist that can create votes or vote for the exist events.</h4>
           <h4>The max votes the one user can create is {{baseInfo.maxUserVotes}}.</h4>
@@ -137,7 +137,7 @@
                 <el-card class="box-card">
                   <template #header>
                     <div class="card-header">
-                      <span>Id: <el-link type="success" @click="javascript:void(0);">{{vote.voteId}}</el-link>    Votes: <el-link type="success" @click="javascript:void(0);">{{vote.voteAggrees}}</el-link></span>
+                      <span>Id: <el-link type="success" href="javascript:void(0);">{{vote.voteId}}</el-link>    Votes: <el-link type="success" href="javascript:void(0);">{{vote.voteAggrees}}</el-link></span>
                       <el-button-group>                                       
                         <el-button v-if="activeName==='mine'" size="small" type="danger" @click="onDelVote(vote.voteId)">
                           Delete<el-icon><delete /></el-icon>
@@ -148,7 +148,7 @@
                   <table>
                     <tr>
                       <td style="float:left;">
-                        <el-link type="primary" @click="javascript:void(0);">Vote:</el-link>
+                        <el-link type="primary" href="javascript:void(0);">Vote:</el-link>
                       </td>
                       <td style="float:right;">
                       <el-popover
@@ -158,7 +158,7 @@
                         trigger="hover"
                       >
                         <template #reference>
-                          <el-link type="danger" @click="javascript:void(0);" style="margin-left: 10px;">{{vote.voteTitle}}</el-link>
+                          <el-link type="danger" href="javascript:void(0);" style="margin-left: 10px;">{{vote.voteTitle}}</el-link>
                         </template>
                         <h5>{{vote.voteContent}}.</h5>
                       </el-popover>
@@ -166,26 +166,26 @@
                     </tr>  
                     <tr>
                       <td style="float:left;">
-                        <el-link type="primary" @click="javascript:void(0);">Value:</el-link>
+                        <el-link type="primary" href="javascript:void(0);">Value:</el-link>
                       </td>
                       <td style="float:right;">
-                        <el-link type="danger" @click="javascript:void(0);">{{vote.voteValue}}</el-link>
+                        <el-link type="danger" href="javascript:void(0);">{{vote.voteValue}}</el-link>
                       </td>
                     </tr>                                        
                     <tr>
                       <td style="float:left;">
-                        <el-link type="primary" @click="javascript:void(0);">Endtime:</el-link>
+                        <el-link type="primary" href="javascript:void(0);">Endtime:</el-link>
                       </td>
                       <td style="float:right;">
-                        <el-link type="danger" @click="javascript:void(0);">{{(new Date(vote.voteDeadline*1000)).toLocaleString()}}</el-link>
+                        <el-link type="danger" href="javascript:void(0);">{{(new Date(vote.voteDeadline*1000)).toLocaleString()}}</el-link>
                       </td>
                     </tr>
                     <tr>
                       <td style="float:left;">
-                        <el-link type="primary" @click="javascript:void(0);">Adopted:</el-link>
+                        <el-link type="primary" href="javascript:void(0);">Adopted:</el-link>
                       </td>
                       <td style="float:right;">
-                        <el-link type="danger" @click="javascript:void(0);">{{vote.voteSuccess}}</el-link>
+                        <el-link type="danger" href="javascript:void(0);">{{vote.voteSuccess}}</el-link>
                       </td>
                     </tr>    
                     <tr>

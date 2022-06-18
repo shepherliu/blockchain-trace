@@ -121,7 +121,7 @@
   
   <!-- side drawer component-->
   <el-drawer v-model="showSwitchNetwork" direction="rtl" destroy-on-close @open="onDrawerOpen">
-      <template #title>
+      <template #header>
         <h4>Select to config the network</h4>   
       </template>
       <template #default>

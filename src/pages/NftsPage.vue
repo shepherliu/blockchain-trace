@@ -15,7 +15,7 @@
           trigger="hover"
         >
           <template #reference>
-            <el-link type="primary" @click="javascript:void(0);" style="margin-left: 10px;">Max NFTs: {{baseInfo.maxtotalSupply}}</el-link>
+            <el-link type="primary" href="javascript:void(0);" style="margin-left: 10px;">Max NFTs: {{baseInfo.maxtotalSupply}}</el-link>
           </template>
           <h4>The max number that this NFT project can be minted.</h4>
         </el-popover>
@@ -26,7 +26,7 @@
           trigger="hover"
         >
           <template #reference>
-            <el-link type="success" @click="javascript:void(0);" style="margin-left: 10px;">Minted NFTs: {{baseInfo.currentTotalSupply}}</el-link>
+            <el-link type="success" href="javascript:void(0);" style="margin-left: 10px;">Minted NFTs: {{baseInfo.currentTotalSupply}}</el-link>
           </template>
           <h4>The current number that this NFT project has already be minted.</h4>
         </el-popover>
@@ -37,7 +37,7 @@
           trigger="hover"
         >
           <template #reference>
-            <el-link type="warning" @click="javascript:void(0);" style="margin-left: 10px;">My Limits: {{baseInfo.maxUserSupply}}</el-link>
+            <el-link type="warning" href="javascript:void(0);" style="margin-left: 10px;">My Limits: {{baseInfo.maxUserSupply}}</el-link>
           </template>
           <h4>The max number that this NFT project can be minted for every single user.</h4>
         </el-popover>
@@ -48,7 +48,7 @@
           trigger="hover"
         >
           <template #reference>
-            <el-link type="info" @click="javascript:void(0);" style="margin-left: 10px;">My Mints: {{baseInfo.currentUserBalance}}</el-link> 
+            <el-link type="info" href="javascript:void(0);" style="margin-left: 10px;">My Mints: {{baseInfo.currentUserBalance}}</el-link> 
           </template>
           <h4>The current number that this NFT project has already be minted for the current user.</h4>
         </el-popover>
@@ -59,7 +59,7 @@
           trigger="hover"
         >
           <template #reference>
-            <el-link type="danger" @click="javascript:void(0);" style="margin-left: 10px;">User Banned: {{baseInfo.currentUserBanned}}</el-link>   
+            <el-link type="danger" href="javascript:void(0);" style="margin-left: 10px;">User Banned: {{baseInfo.currentUserBanned}}</el-link>   
           </template>
           <h4>The current user has be banned or not. For users who get more than {{baseInfo.maxUserHates}} unlikes will be banned from this NFT project until they burn their low quility NFTs.</h4>
         </el-popover>
