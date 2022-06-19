@@ -35,9 +35,11 @@
         
  6. see our daemon website: https://blockchain-trace.vercel.app
 
- 7. see our daemon video send tokens and nfts with unstoppable domains api:
+ 7. see our daemon video for using covalent apis: https://youtu.be/4iJ8eOUAs5g
+
+ 8. see our daemon video send tokens and nfts with unstoppable domains api: https://youtu.be/oasJbIPMMOU
  
- 8. see our daemon video login in with unstoppable domains:
+ 9. see our daemon video login in with unstoppable domains: https://youtu.be/o8i0wzMjQPQ
 
  ***Future Plans***:
 
