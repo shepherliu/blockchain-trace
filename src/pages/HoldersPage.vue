@@ -203,6 +203,7 @@ const getTokenCount = async () => {
   tokenList.value = newTokenList;
 }
 
+//on click for prev page
 const onHandlePrev = async () => {
   if(currentPage.value > 0){
     currentPage.value--;
@@ -211,6 +212,7 @@ const onHandlePrev = async () => {
   handleClick();
 }
 
+//on click for next page
 const onHandleNext = async () => {
   if(hasMore.value){
     currentPage.value++;

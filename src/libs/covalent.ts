@@ -1,5 +1,6 @@
 import * as constant from '../constant'
 
+//get token balance for a given address
 export const getTokenBalancesForAddress = async (chainId:number, address:string, nft:boolean = false) => {
 
 	let url = `${constant.covalentApiHost}/v1/${chainId}/address/${address}/balances_v2/?key=${constant.covalentApiKey}`;
@@ -32,6 +33,7 @@ export const getTokenBalancesForAddress = async (chainId:number, address:string,
 	return res;
 }
 
+//get erc20 token transfers for a given address
 export const getErc20TokenTransfersForAddress = async (chainId:number, address:string, contract:string, pageSize:number = 10, currentPage:number = 0) => {
 	
 	const url = `${constant.covalentApiHost}/v1/${chainId}/address/${address}/transfers_v2/?contract-address=${contract}&key=${constant.covalentApiKey}&quote-currency=USD&format=JSON&page-number=${currentPage}&page-size=${pageSize}`;
@@ -64,6 +66,7 @@ export const getErc20TokenTransfersForAddress = async (chainId:number, address:s
 	return {data:res, hasMore: hasMore};  
 }
 
+//get a token holder list for at a block height
 export const getTokenHoldersForBlockHeight = async (chainId:number, contract:string, blockHeight:number = -1, pageSize:number = 10, currentPage:number = 0) => {
 	
 	let url = `${constant.covalentApiHost}/v1/${chainId}/tokens/${contract}/token_holders/?key=${constant.covalentApiKey}&quote-currency=USD&format=JSON&page-number=${currentPage}&page-size=${pageSize}`;
@@ -100,6 +103,7 @@ export const getTokenHoldersForBlockHeight = async (chainId:number, contract:str
 	return {data:res, hasMore: hasMore};    	
 }
 
+//get changes in token holders between two blocks
 export const getChangesInTokenHoldersBetweenBlocks = async (chainId:number, contract:string, blockStart:number, blockEnd:number, pageSize:number = 10, currentPage:number = 0) => {
 
 	const url = `${constant.covalentApiHost}/v1/${chainId}/tokens/${contract}/token_holders_changes/?starting-block=${blockStart}&ending-block=${blockEnd}&key=${constant.covalentApiKey}&quote-currency=USD&format=JSON&page-number=${currentPage}&page-size=${pageSize}`;
@@ -132,6 +136,7 @@ export const getChangesInTokenHoldersBetweenBlocks = async (chainId:number, cont
 	return {data:res, hasMore: hasMore};    	
 }
 
+//get nft token ids for a given contract
 export const getNFTTokenIdForContract = async (chainId:number, contract:string) => {
 
 	const url = `${constant.covalentApiHost}/v1/${chainId}/tokens/${contract}/nft_token_ids/?key=${constant.covalentApiKey}`;
@@ -161,6 +166,7 @@ export const getNFTTokenIdForContract = async (chainId:number, contract:string) 
 
 }
 
+//get nft transactions for a given contract
 export const getNFTTransactionsForContract = async (chainId:number, contract:string, tokenId:number) => {
 
 	const url = `${constant.covalentApiHost}/v1/${chainId}/tokens/${contract}/nft_transactions/${tokenId}/?key=${constant.covalentApiKey}`;
@@ -190,6 +196,7 @@ export const getNFTTransactionsForContract = async (chainId:number, contract:str
 
 }
 
+//get nft external metadata for a given contract
 export const getNFTExternalMetadataForContract = async (chainId:number, contract:string, tokenId:number) => {
 
 	const url = `${constant.covalentApiHost}/v1/${chainId}/tokens/${contract}/nft_metadata/${tokenId}/?key=${constant.covalentApiKey}`;
@@ -218,6 +225,7 @@ export const getNFTExternalMetadataForContract = async (chainId:number, contract
 	return res;  		
 }
 
+//get transactions for a given address
 export const getTransactionsForAddress = async (chainId:number, address:string, pageSize:number = 10, currentPage:number = 0) => {
 
 	const url = `${constant.covalentApiHost}/v1/${chainId}/address/${address}/transactions_v2/?key=${constant.covalentApiKey}&quote-currency=USD&format=JSON&page-number=${currentPage}&page-size=${pageSize}`;
@@ -250,6 +258,7 @@ export const getTransactionsForAddress = async (chainId:number, address:string, 
 	return {data:res, hasMore: hasMore};  
 }
 
+//get transaction detail
 export const getTransaction = async (chainId:number, transaction:string) => {
 
 	const url = `${constant.covalentApiHost}/v1/${chainId}/transaction_v2/${transaction}/?key=${constant.covalentApiKey}`;
@@ -279,6 +288,7 @@ export const getTransaction = async (chainId:number, transaction:string) => {
 
 }
 
+//get a block info
 export const getBlock = async (chainId:number, block:number|string) => {
 
 	const url = `${constant.covalentApiHost}/v1/${chainId}/block_v2/${block}/?key=${constant.covalentApiKey}`;
@@ -307,6 +317,7 @@ export const getBlock = async (chainId:number, block:number|string) => {
 	return res; 		
 }
 
+//get blocks between given times
 export const getBlockHeights = async (chainId:number, starttime:string, endtime:string) => {
 
 	const url = `${constant.covalentApiHost}/v1/${chainId}/block_v2/${starttime}/${endtime}/?key=${constant.covalentApiKey}`;
@@ -335,6 +346,7 @@ export const getBlockHeights = async (chainId:number, starttime:string, endtime:
 	return res; 	
 }
 
+//get log events for a given contract
 export const getLogEventsByContractAddress = async (chainId:number, contract:string, blockstart:number, blockend:number, pageSize:number = 10, currentPage:number = 0) => {
 
 	const url = `${constant.covalentApiHost}/v1/${chainId}/events/address/${contract}/?starting-block=${blockstart}&ending-block=${blockend}&key=${constant.covalentApiKey}&quote-currency=USD&format=JSON&page-number=${currentPage}&page-size=${pageSize}`;
@@ -367,6 +379,7 @@ export const getLogEventsByContractAddress = async (chainId:number, contract:str
 	return {data:res, hasMore: hasMore};	
 }
 
+//get all surported chains for covalent
 export const getAllChains = async () => {
 
 	const url = `${constant.covalentApiHost}/v1/chains?key=${constant.covalentApiKey}`;
@@ -396,6 +409,7 @@ export const getAllChains = async () => {
 
 }
 
+//get all chain status
 export const getAllChainStatuses = async () => {
 
 	const url = `${constant.covalentApiHost}/v1/chains/status/?key=${constant.covalentApiKey}`;

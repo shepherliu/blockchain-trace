@@ -183,6 +183,7 @@ const onClickToCopy = async (content:string) => {
   element.elMessage('success', 'Copy ' + content + ' to clipboard success.');     
 };
 
+//on click to send token 
 const sendToken = (contractName:string, contractAddress:string, balance:string, decimals:string) => {
   const opts = {
     message: '',
@@ -240,6 +241,7 @@ const sendToken = (contractName:string, contractAddress:string, balance:string, 
   });  
 }
 
+//send erc20 tokens to a address
 const sendErc20Token = async (contractName:string, contractAddress:string, name:string, address:string, balance:string, decimals:string) => {
   //enter amount to send
   const opts = {
@@ -317,6 +319,7 @@ const sendErc20Token = async (contractName:string, contractAddress:string, name:
   });
 }
 
+//on click to send nft token
 const sendNftToken = (contractName:string, contractAddress:string, tokenId:string) => {
   const opts = {
     message: '',
@@ -374,6 +377,7 @@ const sendNftToken = (contractName:string, contractAddress:string, tokenId:strin
   });
 }
 
+//send a nft to a given address
 const sendNFT = (contractName:string, contractAddress:string, name:string, address:string, tokenId:string) => {
 
   const opts = {
