@@ -32,9 +32,9 @@ export const getTokenBalancesForAddress = async (chainId:number, address:string,
 	return res;
 }
 
-export const getErc20TokenTransfersForAddress = async (chainId:number, address:string, contract:string) => {
+export const getErc20TokenTransfersForAddress = async (chainId:number, address:string, contract:string, pageSize:number = 10, currentPage:number = 0) => {
 	
-	const url = `${constant.covalentApiHost}/v1/${chainId}/address/${address}/transfers_v2/?contract-address=${contract}&key=${constant.covalentApiKey}`;
+	const url = `${constant.covalentApiHost}/v1/${chainId}/address/${address}/transfers_v2/?contract-address=${contract}&key=${constant.covalentApiKey}&quote-currency=USD&format=JSON&page-number=${currentPage}&page-size=${pageSize}`;
 
 	let res = await fetch(url, {
 		headers: {
@@ -51,21 +51,25 @@ export const getErc20TokenTransfersForAddress = async (chainId:number, address:s
 		throw new Error('get erc20 token transfer for address failed.');
 	}
 
+	let hasMore = false;
+
 	try{
-		res = ((await res.json()) as any)['data']['items'];
+		res = await res.json();
+		hasMore = (res as any)['data']['pagination']['has_more'];
+		res = (res as any)['data']['items'];
 	}catch(e){
-		throw new Error('get erc20 token transfer for address failed.');
+		throw new Error('get token holders for block height failed.');
 	}
 
-	return res;  	
+	return {data:res, hasMore: hasMore};  
 }
 
-export const getTokenHoldersForBlockHeight = async (chainId:number, contract:string, blockheight:number = 0) => {
+export const getTokenHoldersForBlockHeight = async (chainId:number, contract:string, blockHeight:number = -1, pageSize:number = 10, currentPage:number = 0) => {
 	
-	let url = `${constant.covalentApiHost}/v1/${chainId}/tokens/${contract}/token_holders/?key=${constant.covalentApiKey}`;
+	let url = `${constant.covalentApiHost}/v1/${chainId}/tokens/${contract}/token_holders/?key=${constant.covalentApiKey}&quote-currency=USD&format=JSON&page-number=${currentPage}&page-size=${pageSize}`;
 
-	if(blockheight > 0){
-		url = `${constant.covalentApiHost}/v1/${chainId}/tokens/${contract}/token_holders/?block-height=${blockheight}&key=${constant.covalentApiKey}`;
+	if(blockHeight >= 0){
+		url = `${constant.covalentApiHost}/v1/${chainId}/tokens/${contract}/token_holders/?block-height=${blockHeight}&key=${constant.covalentApiKey}&quote-currency=USD&format=JSON&page-number=${currentPage}&page-size=${pageSize}`;
 	}
 
 	let res = await fetch(url, {
@@ -83,18 +87,22 @@ export const getTokenHoldersForBlockHeight = async (chainId:number, contract:str
 		throw new Error('get token holders for block height failed.');
 	}
 
+	let hasMore = false;
+
 	try{
-		res = ((await res.json()) as any)['data']['items'];
+		res = await res.json();
+		hasMore = (res as any)['data']['pagination']['has_more'];
+		res = (res as any)['data']['items'];
 	}catch(e){
 		throw new Error('get token holders for block height failed.');
 	}
 
-	return res;    	
+	return {data:res, hasMore: hasMore};    	
 }
 
-export const getChangesInTokenHoldersBetweenBlocks = async (chainId:number, contract:string, blockstart:number, blockend:number) => {
+export const getChangesInTokenHoldersBetweenBlocks = async (chainId:number, contract:string, blockStart:number, blockEnd:number, pageSize:number = 10, currentPage:number = 0) => {
 
-	const url = `${constant.covalentApiHost}/v1/${chainId}/tokens/${contract}/token_holders_changes/?starting-block=${blockstart}&ending-block=${blockend}&key=${constant.covalentApiKey}`;
+	const url = `${constant.covalentApiHost}/v1/${chainId}/tokens/${contract}/token_holders_changes/?starting-block=${blockStart}&ending-block=${blockEnd}&key=${constant.covalentApiKey}&quote-currency=USD&format=JSON&page-number=${currentPage}&page-size=${pageSize}`;
 
 	let res = await fetch(url, {
 		headers: {
@@ -111,13 +119,17 @@ export const getChangesInTokenHoldersBetweenBlocks = async (chainId:number, cont
 		throw new Error('get token holders changes between blocks height failed.');
 	}
 
+	let hasMore = false;
+
 	try{
-		res = ((await res.json()) as any)['data']['items'];
+		res = await res.json();
+		hasMore = (res as any)['data']['pagination']['has_more'];
+		res = (res as any)['data']['items'];
 	}catch(e){
-		throw new Error('get token holders changes between blocks height failed.');
+		throw new Error('get token holders for block height failed.');
 	}
 
-	return res;  
+	return {data:res, hasMore: hasMore};    	
 }
 
 export const getNFTTokenIdForContract = async (chainId:number, contract:string) => {
@@ -206,9 +218,9 @@ export const getNFTExternalMetadataForContract = async (chainId:number, contract
 	return res;  		
 }
 
-export const getTransactionsForAddress = async (chainId:number, address:string) => {
+export const getTransactionsForAddress = async (chainId:number, address:string, pageSize:number = 10, currentPage:number = 0) => {
 
-	const url = `${constant.covalentApiHost}/v1/${chainId}/address/${address}/transactions_v2/?key=${constant.covalentApiKey}`;
+	const url = `${constant.covalentApiHost}/v1/${chainId}/address/${address}/transactions_v2/?key=${constant.covalentApiKey}&quote-currency=USD&format=JSON&page-number=${currentPage}&page-size=${pageSize}`;
 
 	let res = await fetch(url, {
 		headers: {
@@ -225,13 +237,17 @@ export const getTransactionsForAddress = async (chainId:number, address:string) 
 		throw new Error('get transactions for address failed.');
 	}
 
+	let hasMore = false;
+
 	try{
-		res = ((await res.json()) as any)['data']['items'];
+		res = await res.json();
+		hasMore = (res as any)['data']['pagination']['has_more'];
+		res = (res as any)['data']['items'];
 	}catch(e){
-		throw new Error('get transactions for address failed.');
+		throw new Error('get token holders for block height failed.');
 	}
 
-	return res; 	
+	return {data:res, hasMore: hasMore};  
 }
 
 export const getTransaction = async (chainId:number, transaction:string) => {
@@ -319,9 +335,9 @@ export const getBlockHeights = async (chainId:number, starttime:string, endtime:
 	return res; 	
 }
 
-export const getLogEventsByContractAddress = async (chainId:number, contract:string, blockstart:number, blockend:number) => {
+export const getLogEventsByContractAddress = async (chainId:number, contract:string, blockstart:number, blockend:number, pageSize:number = 10, currentPage:number = 0) => {
 
-	const url = `${constant.covalentApiHost}/v1/${chainId}/events/address/${contract}/?starting-block=${blockstart}&ending-block=${blockend}&key=${constant.covalentApiKey}`;
+	const url = `${constant.covalentApiHost}/v1/${chainId}/events/address/${contract}/?starting-block=${blockstart}&ending-block=${blockend}&key=${constant.covalentApiKey}&quote-currency=USD&format=JSON&page-number=${currentPage}&page-size=${pageSize}`;
 
 	let res = await fetch(url, {
 		headers: {
@@ -338,13 +354,17 @@ export const getLogEventsByContractAddress = async (chainId:number, contract:str
 		throw new Error('get log events by contract address failed.');
 	}
 
+	let hasMore = false;
+
 	try{
-		res = ((await res.json()) as any)['data']['items'];
+		res = await res.json();
+		hasMore = (res as any)['data']['pagination']['has_more'];
+		res = (res as any)['data']['items'];
 	}catch(e){
-		throw new Error('get log events by contract address failed.');
+		throw new Error('get token holders for block height failed.');
 	}
 
-	return res; 		
+	return {data:res, hasMore: hasMore};	
 }
 
 export const getAllChains = async () => {

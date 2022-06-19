@@ -16,8 +16,9 @@
         element-loading-background="#ffffff"
       >
         <el-row :gutter="20">
-          <el-col :span="9">
-            <el-input size="large" v-model="searchContent" :placeholder="userAddr" style="margin-top: 10px;">
+          <el-col :span="11">
+            <el-input size="large" v-model="addressContent" :placeholder="userAddr" style="margin-top: 10px;">
+              <template #prepend>Address</template>
             </el-input>
           </el-col>
           <el-col :span="1">
@@ -30,7 +31,7 @@
           <table v-if="activeName === 'tokens'">
             <thead>
               <th width="150px">Name</th>
-              <th width="250px">Contract</th>
+              <th width="380px">Contract</th>
               <th width="150px">Balance</th>
               <th width="150px">Decimals</th>
               <th width="150px">Price (USD)</th>
@@ -42,7 +43,10 @@
                   <td>
                     <el-link :href="tokenExplorerUrl(item.contract)" type="primary" target="_blank">{{item.name}}<el-image :src="item.logo" style="width: 25px;"></el-image></el-link>
                   </td>
-                  <td><el-link :href="tokenExplorerUrl(item.contract)" type="primary" target="_blank">{{item.contract}}</el-link></td>
+                  <td>
+                    <el-link :href="tokenExplorerUrl(item.contract)" type="primary" target="_blank">{{item.contract}}</el-link>
+                    <el-icon @click="onClickToCopy(item.contract)" style="margin-left: 3px;"><document-copy /></el-icon>
+                  </td>
                   <td>{{item.balance}}</td>
                   <td>{{item.decimals}}</td>
                   <td>{{item.price}}</td>
@@ -54,7 +58,7 @@
           <table v-if="activeName === 'nfts'">
             <thead>
               <th width="150px">Name</th>
-              <th width="250px">Contract</th>
+              <th width="380px">Contract</th>
               <th width="150px">Balance</th>
               <th width="150px">tokenId</th>
               <th width="150px">TokenUrl</th>
@@ -67,9 +71,15 @@
                   <td>
                     <el-link :href="tokenExplorerUrl(item.contract)" type="primary" target="_blank">{{item.name}}<el-image :src="item.logo" style="width: 25px;"></el-image></el-link>
                   </td>
-                  <td><el-link :href="tokenExplorerUrl(item.contract)" type="primary" target="_blank">{{item.contract}}</el-link></td>
+                  <td>
+                    <el-link :href="tokenExplorerUrl(item.contract)" type="primary" target="_blank">{{item.contract}}</el-link>
+                    <el-icon @click="onClickToCopy(item.contract)" style="margin-left: 3px;"><document-copy /></el-icon>
+                  </td>
                   <td>{{item.balance}}</td>
-                  <td><el-link :href="tokenExplorerUrl(item.contract, item.tokenId)" type="primary" target="_blank">{{item.tokenId}}</el-link></td>
+                  <td>
+                    <el-link :href="tokenExplorerUrl(item.contract, item.tokenId)" type="primary" target="_blank">{{item.tokenId}}</el-link>
+                    <el-icon @click="onClickToCopy(item.tokenId)" style="margin-left: 3px;"><document-copy /></el-icon>
+                  </td>
                   <td v-if="item.url"><el-link :href="item.url" type="primary" target="_blank">url</el-link></td>
                   <td v-if="item.url === null"></td>
                   <td>{{item.price}}</td>
@@ -117,7 +127,7 @@ import { connected, connectState, networkConnect } from "../libs/connect"
 import * as element from "../libs/element"
 import * as constant from "../constant"
 
-const searchContent = ref('');
+const addressContent = ref('');
 const userAddr = connectState.userAddr;
 const resolution = new Resolution();
 
@@ -165,6 +175,13 @@ const transactionExplorerUrl = (transaction:string) => {
 
   return transaction;
 }
+
+//on click to copy address
+const onClickToCopy = async (content:string) => {
+  tools.clickToCopy(content);
+  
+  element.elMessage('success', 'Copy ' + content + ' to clipboard success.');     
+};
 
 const sendToken = (contractName:string, contractAddress:string, balance:string, decimals:string) => {
   const opts = {
@@ -410,7 +427,7 @@ const sendNFT = (contractName:string, contractAddress:string, name:string, addre
 const getTokenCount = async () => {
   await networkConnect();
 
-  let address = searchContent.value;
+  let address = addressContent.value;
  
   if(address === ''){
     address = connectState.userAddr.value;
@@ -484,7 +501,7 @@ const getTokenCount = async () => {
 const getNftCount = async () => {
   await networkConnect();
 
-  let address = searchContent.value;
+  let address = addressContent.value;
  
   if(address === ''){
     address = connectState.userAddr.value;

@@ -23,9 +23,8 @@
       >
         <el-menu-item index="1">Tokens</el-menu-item>
         <el-menu-item index="2">Holders</el-menu-item>
-        <el-menu-item index="3">Blocks</el-menu-item>
-        <el-menu-item index="4">Transactions</el-menu-item>
-        <el-menu-item index="5">LogEvents</el-menu-item>
+        <el-menu-item index="3">Transactions</el-menu-item>
+        <el-menu-item index="4">LogEvents</el-menu-item>
       </el-menu>
     </el-col>
 
@@ -247,6 +246,7 @@ const onClearTransactions = async () => {
   connect.connectState.transactions.value = new Array();
   connect.connectState.transactionCount.value = 0; 
 }
+
 //on click to copy address
 const onClickToCopy = async (content:string) => {
   tools.clickToCopy(content);
@@ -295,8 +295,7 @@ try{
   if(activeIndex.value != '1' && 
     activeIndex.value != '2' && 
     activeIndex.value != '3' && 
-    activeIndex.value != '4' && 
-    activeIndex.value != '5'){
+    activeIndex.value != '4'){
     activeIndex.value = '1';
   }
 }catch(e){

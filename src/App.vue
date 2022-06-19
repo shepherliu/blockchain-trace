@@ -2,9 +2,7 @@
   <el-container>
     <el-header><NavBar /></el-header>
     <el-container>
-      <el-main><HomePage /></el-main>
-      <el-aside width="300px">         
-      </el-aside>      
+      <el-main><HomePage /></el-main>   
     </el-container>
     <el-footer>
       <FootPage />

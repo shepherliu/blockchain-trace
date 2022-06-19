@@ -1,13 +1,15 @@
 <template>
   <TokensPage v-if="activeIndex==='1'" />
-<!--   <FoldersPage v-if="activeIndex==='2'"/>
-  <WebsitesPage v-if="activeIndex==='3'"/> -->
+  <HoldersPage v-if="activeIndex==='2'"/>
+  <TransactionsPage v-if="activeIndex==='3'"/>
+  <LogeventsPage v-if="activeIndex==='4'"/>
 </template>
 
 <script lang="ts">
 import TokensPage from './TokensPage.vue';
-// import FoldersPage from './FoldersPage.vue';
-// import WebsitesPage from './WebsitesPage.vue';
+import HoldersPage from './HoldersPage.vue';
+import TransactionsPage from './TransactionsPage.vue';
+import LogeventsPage from './LogeventsPage.vue';
 
 export default {
   name: 'HomePage',
