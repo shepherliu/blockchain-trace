@@ -41,15 +41,9 @@
 
  ***Future Plans***:
 
-   *1. Multi Chain Full Support.*
+   *1. optimization for nft tokens shows more details.*
    
-   *2. Swarm Storage Full Support.*
-   
-   *3. Arweave Storage Full Support.*
-   
-   *5. File/Folder Encrypt And Decrypt Support.*
-   
-   *6. AI NFT Create Support.*
+   *2. optimization for pagination and search functions.*
    
 ***Resources:***
 
