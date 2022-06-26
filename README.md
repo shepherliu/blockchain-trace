@@ -8,6 +8,7 @@
  2. search the all holders for a given contract address.
  3. search the transactions for a given user address and/or a given contract.
  4. search the emit log events for a given contract. (for the hackathon Event-Specific Endpoints).
+ 5. search the identitys for a given address that integrated with the gitcoin passport.
 
 ***How to runs***
 
@@ -40,6 +41,8 @@
  8. see our daemon video send tokens and nfts with unstoppable domains api: https://youtu.be/oasJbIPMMOU
  
  9. see our daemon video login in with unstoppable domains: https://youtu.be/o8i0wzMjQPQ
+ 
+ 10. see our daemon video that search the gitcoin passport: https://www.youtube.com/watch?v=_QtJpyeeTZg
 
  ***Future Plans***:
 
@@ -61,15 +64,21 @@
 
 *2. Covalent Resource Docs:*
 
-   getting started wit Covalent:  https://www.covalenthq.com/
+   getting started with Covalent:  https://www.covalenthq.com/
    
-   getting started wit Covalent apis: https://www.covalenthq.com/docs/api/#/
+   getting started with Covalent apis: https://www.covalenthq.com/docs/api/#/
+   
+*3. Gitcoin Passport Resource Docs:*
 
-*3. Transak Docs:*
+   getting started with gitcoin passport: https://docs.passport.gitcoin.co/gitcoin-passport-sdk/getting-started
+   
+   github resources: https://github.com/gitcoinco/passport-sdk
+
+*4. Transak Docs:*
 
    getting started wit Transak: https://integrate.transak.com/
    
-*4. Unstoppable Domains:*
+*5. Unstoppable Domains:*
 
   unstoppable Domains Resolution API: https://docs.alchemy.com/alchemy/enhanced-apis/unstoppable-domains-apis
 
@@ -81,7 +90,7 @@
 
   crypto payments integration guide: https://docs.unstoppabledomains.com/send-and-receive-crypto-payments/crypto-payments
 
-*5. Smart contract Resource Docs:*
+*6. Smart contract Resource Docs:*
 
    online solidity compilier: https://chainide.com/, https://remix.ethereum.org/
    
@@ -89,7 +98,7 @@
    
    getting started with solidity: https://docs.soliditylang.org/en/latest/
    
-*6. Fronted Resource Docs:*
+*7. Fronted Resource Docs:*
 
    getting started with Vue3: https://vuejs.org/guide/introduction.html
    
