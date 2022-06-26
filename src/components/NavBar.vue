@@ -25,6 +25,7 @@
         <el-menu-item index="2">Holders</el-menu-item>
         <el-menu-item index="3">Transactions</el-menu-item>
         <el-menu-item index="4">LogEvents</el-menu-item>
+        <el-menu-item index="5">Identitys</el-menu-item>
       </el-menu>
     </el-col>
 
@@ -295,7 +296,8 @@ try{
   if(activeIndex.value != '1' && 
     activeIndex.value != '2' && 
     activeIndex.value != '3' && 
-    activeIndex.value != '4'){
+    activeIndex.value != '4' &&
+    activeIndex.value != '5'){
     activeIndex.value = '1';
   }
 }catch(e){

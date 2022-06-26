@@ -6,6 +6,9 @@ export const covalentApiHost = 'https://api.covalenthq.com'
 //covalent api key
 export const covalentApiKey = 'ckey_c6e3dad6bbed4224bdb769673a9'
 
+//ceramic host
+export const CeramicApiHost = 'https://ceramic.passport-iam.gitcoin.co';
+
 //swarm ts-tar metafile name
 export const META_FILE_NAME = '.swarmgatewaymeta.json';
 
