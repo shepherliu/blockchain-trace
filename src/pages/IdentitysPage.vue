@@ -86,7 +86,7 @@ export default {
 <script setup lang="ts">
 import { ref } from "vue"
 import { PassportReader } from '@gitcoinco/passport-sdk-reader'
-// import { PassportScorer } from '@gitcoinco/passport-sdk-scorer';
+import { PassportScorer } from '@gitcoinco/passport-sdk-scorer';
 
 import Resolution from "@unstoppabledomains/resolution";
 import * as tools from "../libs/tools"
@@ -257,20 +257,20 @@ const handleClick = async () => {
 
     tokenList.value = tokenList.value.slice(start, end);
 
-    // for (const i in tokenList.value){
-    //   try{
-    //     const pass = tokenList.value[i];
-    //     const scorer = new PassportScorer([{
-    //       provider: pass.name,
-    //       issuer: pass.issuer,
-    //       score: 0.5,
-    //     }], constant.CeramicApiHost, connectState.chainId);
+    for (const i in tokenList.value){
+      try{
+        const pass = tokenList.value[i];
+        const scorer = new PassportScorer([{
+          provider: pass.name,
+          issuer: pass.issuer,
+          score: 0.5,
+        }], constant.CeramicApiHost, connectState.chainId);
 
-    //      tokenList.value[i].score = await scorer.getScore(pass.address);
-    //   }catch(e){
-    //     continue;
-    //   }
-    // }
+         tokenList.value[i].score = await scorer.getScore(pass.address);
+      }catch(e){
+        continue;
+      }
+    }
 
   }catch(e){
      tokenList.value = new Array();

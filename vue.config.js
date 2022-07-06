@@ -22,6 +22,9 @@ module.exports = defineConfig({
         zlib: require.resolve("browserify-zlib"),
       },
     },
+    experiments:{
+      asyncWebAssembly: true
+    },
     plugins: [
       new webpack.ProvidePlugin({
         Buffer: ["buffer", "Buffer"],
