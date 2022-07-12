@@ -60,6 +60,12 @@ export const fileSize = (size: number) => {
 	return size.toFixed(2) + 'GB'
 }
 
+//sleep a little while
+export const sleep = async (time:number) => {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+//get url paramter
 export const getUrlParamter = (name:string) => {
 	const reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
   const r = (window as any).location.search.substr(1).match(reg);
@@ -69,6 +75,7 @@ export const getUrlParamter = (name:string) => {
   return '';
 }
 
+//set url patamter
 export const setUrlParamter = (name:string, value:string) => {
   const oldUrl = (window as any).location.href.toString();
   const re = new RegExp(name + '=[^&]*', 'gi');

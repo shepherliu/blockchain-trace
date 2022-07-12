@@ -215,6 +215,8 @@ const getTokenCount = async () => {
 
 //click to change active item and refresh page
 const handleClick = async () => {
+  //wait for the active name change
+  await tools.sleep(100);  
 
   connectState.activeName.value = activeName.value;
   tools.setUrlParamter('activeName', activeName.value);
