@@ -29,6 +29,11 @@ export const elMessageConfirm = async(desc:string, title:string, options: Object
 
 //trigger an error message from metamask
 export const alertMessage = async(error: any) => {
+    if(typeof error === 'string'){
+        elMessage('error', truncateString(error, 300)); 
+        return;
+    }
+        
     if( error.data != undefined && 
         error.data != null && 
         error.data.message != undefined && 
