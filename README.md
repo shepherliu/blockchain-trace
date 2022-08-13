@@ -35,14 +35,16 @@
         npm run build
         
  6. see our daemon website: https://blockchain-trace.vercel.app
-
- 7. see our daemon video for using covalent apis: https://youtu.be/4iJ8eOUAs5g
-
- 8. see our daemon video send tokens and nfts with unstoppable domains api: https://youtu.be/oasJbIPMMOU
  
- 9. see our daemon video login in with unstoppable domains: https://youtu.be/o8i0wzMjQPQ
+ 7. see our daemon video for cross chain token using biconomy widget: https://youtu.be/Ar70QRaDfBk
+
+ 8. see our daemon video for using covalent apis: https://youtu.be/4iJ8eOUAs5g
+
+ 9. see our daemon video send tokens and nfts with unstoppable domains api: https://youtu.be/oasJbIPMMOU
  
- 10. see our daemon video that search the gitcoin passport: https://www.youtube.com/watch?v=_QtJpyeeTZg
+ 10. see our daemon video login in with unstoppable domains: https://youtu.be/o8i0wzMjQPQ
+ 
+ 11. see our daemon video that search the gitcoin passport: https://www.youtube.com/watch?v=_QtJpyeeTZg
 
  ***Future Plans***:
 
@@ -61,24 +63,35 @@
    getting started with Metis Network: https://docs.metis.io/
 
    getting started with Meter Network: https://docs.meter.io/developer-documentation/introduction
+   
+   
+*2. biconomy Resource Docs:*
 
-*2. Covalent Resource Docs:*
+    How Zed Run uses the Hyphen SDK -> https://medium.com/biconomy/transforming-the-gaming-experience-on-zed-run-with-biconomy-df8f9bafb673
+    
+    Hyphen Docs: https://docs.biconomy.io/products/hyphen-instant-cross-chain-transfers
+
+    Hyphen Widget Repo - https://github.com/bcnmy/hyphen-widget
+
+    Widget Demo - https://github.com/bcnmy/hyphen-widget-demo
+
+*3. Covalent Resource Docs:*
 
    getting started with Covalent:  https://www.covalenthq.com/
    
    getting started with Covalent apis: https://www.covalenthq.com/docs/api/#/
    
-*3. Gitcoin Passport Resource Docs:*
+*4. Gitcoin Passport Resource Docs:*
 
    getting started with gitcoin passport: https://docs.passport.gitcoin.co/gitcoin-passport-sdk/getting-started
    
    github resources: https://github.com/gitcoinco/passport-sdk
 
-*4. Transak Docs:*
+*5. Transak Docs:*
 
    getting started wit Transak: https://integrate.transak.com/
    
-*5. Unstoppable Domains:*
+*6. Unstoppable Domains:*
 
   unstoppable Domains Resolution API: https://docs.alchemy.com/alchemy/enhanced-apis/unstoppable-domains-apis
 
@@ -90,7 +103,7 @@
 
   crypto payments integration guide: https://docs.unstoppabledomains.com/send-and-receive-crypto-payments/crypto-payments
 
-*6. Smart contract Resource Docs:*
+*7. Smart contract Resource Docs:*
 
    online solidity compilier: https://chainide.com/, https://remix.ethereum.org/
    
@@ -98,7 +111,7 @@
    
    getting started with solidity: https://docs.soliditylang.org/en/latest/
    
-*7. Fronted Resource Docs:*
+*8. Fronted Resource Docs:*
 
    getting started with Vue3: https://vuejs.org/guide/introduction.html
    
