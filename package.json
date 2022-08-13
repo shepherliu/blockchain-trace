@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@biconomy/hyphen-widget": "^0.0.9",
     "@bundlr-network/client": "^0.7.1",
     "@element-plus/icons-vue": "^1.1.4",
     "@gitcoinco/passport-sdk-reader": "^0.1.1",

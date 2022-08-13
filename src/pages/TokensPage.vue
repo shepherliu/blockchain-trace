@@ -5,17 +5,19 @@
         <el-tabs v-model="activeName" class="file-tabs" @tab-click="handleClick">
           <el-tab-pane label="Tokens" name="tokens"></el-tab-pane>
           <el-tab-pane label="Nfts" name="nfts"></el-tab-pane>
+          <el-tab-pane label="Cross" name="cross"></el-tab-pane>
         </el-tabs>
       </el-header>
       <el-main
-        style="height: 450px;" 
+        style="height: 530px;" 
         v-loading="loadStatus"
         element-loading-text="Loading..."
         :element-loading-spinner="svg"
         element-loading-svg-view-box="-10, -10, 50, 50"
         element-loading-background="#ffffff"
       >
-        <el-row :gutter="20">
+        <div v-if="crossChainVisiable" class="crosschainWidget"></div>
+        <el-row v-if="!crossChainVisiable" :gutter="20">
           <el-col :span="11">
             <el-input size="large" v-model="addressContent" :placeholder="userAddr" style="margin-top: 10px;">
               <template #prepend>Address</template>
@@ -120,6 +122,8 @@ export default {
 import { h, ref } from "vue"
 import Resolution from "@unstoppabledomains/resolution";
 import { utils, Contract } from "ethers"
+import * as HyphenWidget from "@biconomy/hyphen-widget";
+import "@biconomy/hyphen-widget/dist/index.css";
 
 import * as covalent from "../libs/covalent"
 import * as tools from "../libs/tools"
@@ -130,6 +134,8 @@ import * as constant from "../constant"
 const addressContent = ref('');
 const userAddr = connectState.userAddr;
 const resolution = new Resolution();
+
+const crossChainVisiable = ref(false);
 
 const activeName = connectState.activeName;
 const loadStatus = ref(false);
@@ -590,6 +596,29 @@ const handleClick = async () => {
   connectState.activeName.value = activeName.value;
   tools.setUrlParamter('activeName', activeName.value);
 
+  if(activeName.value === 'cross'){
+    crossChainVisiable.value = true;
+    //wait for the active name change
+    await tools.sleep(100);  
+    //enable cross widget
+    HyphenWidget.default.init(
+      document.getElementsByClassName("crosschainWidget")[0],
+      {
+        env: 'production',
+        tag: 'cross-chain',
+        showWidget: 'true',
+        apiKeys: {
+          Ethereum: '',
+          Polygon: '',
+          Avalanche: '',
+        },
+      }
+    );
+    return;
+  }else{
+    crossChainVisiable.value = false;
+  }
+
   try{
 
     loadStatus.value = true;
@@ -649,7 +678,8 @@ try{
   activeName.value = tools.getUrlParamter('activeName');
 
   if(activeName.value != 'tokens' && 
-    activeName.value != 'nfts'){
+    activeName.value != 'nfts' &&
+    activeName.value != 'cross'){
 
     activeName.value = 'tokens';
   }
