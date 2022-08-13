@@ -9,6 +9,7 @@
  3. search the transactions for a given user address and/or a given contract.
  4. search the emit log events for a given contract. (for the hackathon Event-Specific Endpoints).
  5. search the identitys for a given address that integrated with the gitcoin passport.
+ 6. cross chain token using biconomy widget.
 
 ***How to runs***
 
