@@ -15,9 +15,8 @@
     "@gitcoinco/passport-sdk-scorer": "^0.1.2",
     "@gitcoinco/passport-sdk-types": "^0.1.1",
     "@types/mime-types": "^2.1.1",
-    "@uauth/js": "^1.1.0",
-    "@uauth/web3modal": "^1.1.0",
-    "@unstoppabledomains/resolution": "^7.1.4",
+    "@uauth/web3modal": "^2.2.0",
+    "@unstoppabledomains/resolution": "^8.3.3",
     "@vue/compiler-sfc": "^3.2.37",
     "@walletconnect/web3-provider": "^1.7.8",
     "arweave": "^1.10.23",
@@ -44,7 +43,7 @@
     "vue-class-component": "^8.0.0-0",
     "vuex": "^4.0.2",
     "web3.storage": "^4.2.0",
-    "web3modal": "^1.9.7",
+    "web3modal": "^1.9.9",
     "webcrypto": "^0.1.1"
   },
   "devDependencies": {
