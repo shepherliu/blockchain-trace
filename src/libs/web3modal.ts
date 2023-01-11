@@ -1,5 +1,6 @@
 
 import * as UAuthWeb3Modal from '@uauth/web3modal'
+import UAuth from '@uauth/js'
 import UAuthSPA from '@uauth/js'
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import Web3Modal from 'web3modal'
@@ -42,5 +43,15 @@ const web3modal = new Web3Modal({cacheProvider: true, providerOptions})
 
 // Register the web3modal so the connector has access to it.
 UAuthWeb3Modal.registerWeb3Modal(web3modal);
+
+export const web3User = async () => {
+  const uauth = new UAuth(uauthOptions);
+
+  try {
+    return await uauth.user();
+  }catch(e){
+    return null;
+  }
+}
 
 export default web3modal

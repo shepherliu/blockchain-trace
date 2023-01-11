@@ -3,6 +3,8 @@ import { providers, utils } from "ethers"
 
 import web3modal from './web3modal'
 
+import { web3User } from './web3modal'
+
 import * as constant from '../constant'
 
 import { shortString } from "./tools"
@@ -79,9 +81,10 @@ export const networkConnect = async () => {
   }
 
   try{
-    const userName = (window as any).localStorage.getItem('uauth-default-username');
-    if(userName != undefined && userName != null && userName != ""){
-      connectState.userName.value = userName;
+    // const userName = (window as any).localStorage.getItem('uauth-default-username');
+    const userInfo = await web3User();
+    if(userInfo != undefined && userInfo != null && userInfo.sub != undefined && userInfo.sub != ""){
+      connectState.userName.value = userInfo.sub;
     }    
     if(await detectNetwork()){
       return true;
